@@ -1,0 +1,8 @@
+{
+  "name": "shepherd",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.3.2",
+    "ember": "~1.10.0"
+  }
+}
