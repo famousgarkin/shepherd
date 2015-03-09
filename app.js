@@ -10,35 +10,35 @@ App.Router.map(function() {
 })
 
 App.IndexRoute = Ember.Route.extend({
-    beforeModel: function() {
+    redirect: function() {
         this.transitionTo('items')
     },
 })
 
-App.ItemsIndexRoute = Ember.Route.extend({
-    beforeModel: function() {
-        this.transitionTo('item', {path: ''})
-    }
-})
-
 App.ItemsRoute = Ember.Route.extend({
     model: function() {
-        // TODO: get navigation from configuration
-        return {
-            navigation: [
-                {name: 'page1/test', url: 'url1'},
-                {name: 'page2/test', url: 'url2'},
-            ],
-        }
+        // TODO: get items from configuration
+        return [
+            {name: 'page1/test', url: 'url1'},
+            {name: 'page2/test', url: 'url2'},
+        ]
+    },
+})
+
+App.ItemsIndexRoute = Ember.Route.extend({
+    redirect: function() {
+        this.transitionTo('item', '')
     },
 })
 
 App.ItemRoute = Ember.Route.extend({
     model: function(params) {
         var model = this.modelFor('items')
-        var item = model.navigation.find(function(item) {
+        if (params.path === '') {
+            return model[0]
+        }
+        return model.find(function(item) {
             return item.name == params.path
         })
-        return item
     },
 })

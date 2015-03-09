@@ -13,7 +13,7 @@
         <li>
             {{#link-to 'application'}}index{{/link-to}}
         </li>
-        {{#each item in navigation}}
+        {{#each item in model}}
         <li>
             {{#link-to 'item' item.name}}{{item.name}}{{/link-to}}
         </li>
