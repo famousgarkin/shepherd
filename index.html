@@ -8,8 +8,23 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <script type="text/x-handlebars">
-        {{outlet}}
+    <script type="text/x-handlebars" data-template-name="items">
+    <ul class="nav nav-tabs">
+        <li>
+            {{#link-to 'application'}}index{{/link-to}}
+        </li>
+        {{#each item in navigation}}
+        <li>
+            {{#link-to 'item' item.name}}{{item.name}}{{/link-to}}
+        </li>
+        {{/each}}
+    </ul>
+    {{outlet}}
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="item">
+    {{name}}
+    {{url}}
     </script>
 
     <!-- TODO: update for release -->
