@@ -1,4 +1,4 @@
-App = Ember.Application.create({
+var App = Ember.Application.create({
     // TODO: scrape for release
     LOG_TRANSITIONS: true
 })
