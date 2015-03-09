@@ -1,3 +1,3 @@
 # Shepherd
 
-Flock those scattered, disparate, legacy tools and pages under a common interface.
+Flock the scattered, disparate, legacy tools and pages under a common interface.
