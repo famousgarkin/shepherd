@@ -3,6 +3,8 @@ var App = Ember.Application.create({
     LOG_TRANSITIONS: true
 })
 
+document.title = config.title
+
 App.Router.map(function() {
     this.resource('items', {path: '/'}, function() {
         this.resource('item', {path: '/*path'})
@@ -17,11 +19,7 @@ App.IndexRoute = Ember.Route.extend({
 
 App.ItemsRoute = Ember.Route.extend({
     model: function() {
-        // TODO: get items from configuration
-        return [
-            {name: 'page1/test', url: 'url1'},
-            {name: 'page2/test', url: 'url2'},
-        ]
+        return config.items
     },
 })
 
