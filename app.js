@@ -57,14 +57,19 @@ App.ItemsIndexRoute = Ember.Route.extend({
     },
 })
 
-App.ItemRoute = Ember.Route.extend({
+App.ItemRoute = Ember.Route.extend(App.TitleHandler, {
     model: function(params) {
-        var model = this.modelFor('items')
+        var items = this.modelFor('items')
         if (params.path === '') {
-            return model[0]
+            var item = items[0]
+        } else {
+            var item = items.find(function(item) {
+                return item.id == params.path
+            })
         }
-        return model.find(function(item) {
-            return item.id == params.path
-        })
+        if (item) {
+            this.set('title', item.name)
+        }
+        return item
     },
 })
