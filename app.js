@@ -1,5 +1,3 @@
-document.title = config.title
-
 var App = Ember.Application.create({
     // TODO: scrape for release
     LOG_TRANSITIONS: true,
@@ -11,7 +9,23 @@ App.Router.map(function() {
     })
 })
 
-App.IndexRoute = Ember.Route.extend({
+App.TitleHandler = Ember.Mixin.create({
+    title: config.title,
+    titleChanged: function() {
+        var title = this.get('title')
+        if (title) {
+            title = title + ' - ' + config.title
+        } else {
+            title = config.title
+        }
+        document.title = title
+    }.observes('title'),
+    beforeModel: function() {
+        this.set('title')
+    },
+})
+
+App.ApplicationRoute = Ember.Route.extend(App.TitleHandler, {
     redirect: function() {
         this.transitionTo('items')
     },

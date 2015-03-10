@@ -1,6 +1,6 @@
 var config = {}
 
-config.title = 'My Shepherd'
+config.title = 'Shepherd'
 
 config.items = [
     {name: 'page    1', url: 'url1'},
