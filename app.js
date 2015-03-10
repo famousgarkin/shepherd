@@ -1,21 +1,5 @@
 document.title = config.title
 
-;(function() {
-    var visitIds = function visitIds(item) {
-        if (item.name) {
-            item.id = item.name
-                .replace(/(\s|[\/])+/g, '-')
-                .replace(/[?]+/g, '')
-        }
-        if (item.items) {
-            for (var i = 0; i < config.items.length; i++) {
-                visitIds(item.items[i])
-            }
-        }
-    }
-    visitIds(config)
-}(config))
-
 var App = Ember.Application.create({
     // TODO: scrape for release
     LOG_TRANSITIONS: true,
@@ -35,7 +19,21 @@ App.IndexRoute = Ember.Route.extend({
 
 App.ItemsRoute = Ember.Route.extend({
     model: function() {
-        return config.items
+        var items = config.items.copy(true)
+        var visitIds = function visitIds(item) {
+            if (item.name) {
+                item.id = item.name
+                    .replace(/(\s|[\/])+/g, '-')
+                    .replace(/[?]+/g, '')
+            }
+            if (item.items) {
+                for (var i = 0; i < config.items.length; i++) {
+                    visitIds(item.items[i])
+                }
+            }
+        }
+        visitIds({items: items})
+        return items
     },
 })
 
