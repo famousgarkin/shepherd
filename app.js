@@ -1,9 +1,25 @@
+document.title = config.title
+
+;(function() {
+    var visitIds = function visitIds(item) {
+        if (item.name) {
+            item.id = item.name
+                .replace(/(\s|[\/])+/g, '-')
+                .replace(/[?]+/g, '')
+        }
+        if (item.items) {
+            for (var i = 0; i < config.items.length; i++) {
+                visitIds(item.items[i])
+            }
+        }
+    }
+    visitIds(config)
+}(config))
+
 var App = Ember.Application.create({
     // TODO: scrape for release
-    LOG_TRANSITIONS: true
+    LOG_TRANSITIONS: true,
 })
-
-document.title = config.title
 
 App.Router.map(function() {
     this.resource('items', {path: '/'}, function() {
@@ -36,7 +52,7 @@ App.ItemRoute = Ember.Route.extend({
             return model[0]
         }
         return model.find(function(item) {
-            return item.name == params.path
+            return item.id == params.path
         })
     },
 })
