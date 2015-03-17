@@ -41,9 +41,9 @@ App.ItemsRoute = Ember.Route.extend({
                     .replace(/[?]+/g, '')
             }
             if (item.items) {
-                for (var i = 0; i < config.items.length; i++) {
-                    visitIds(item.items[i])
-                }
+                item.items.forEach(function(item) {
+                    visitIds(item)
+                })
             }
         }
         visitIds({items: items})
