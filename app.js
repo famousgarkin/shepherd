@@ -28,7 +28,7 @@ App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
 })
 
 ;(function() {
-    var items = config.items.copy(true)
+    var items = Ember.copy(config.items, true)
     var visitItem = function visitItem(item) {
         if (item.name) {
             item.id = item.name
@@ -45,16 +45,20 @@ App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
     visitItem({items: items})
 
     var itemFactory = function(idPath) {
+        idPath = idPath.toLowerCase()
+        var item
         // TODO: arbitrary level selection
+        var localItems = Ember.copy(items, true)
         if (idPath === '') {
-            item = items[0]
+            item = localItems[0]
         } else {
-            item = items.find(function(item) {
-                return item.id == idPath.toLowerCase()
+            item = localItems.find(function(item) {
+                return item.id == idPath
             })
         }
         if (item) {
-            Ember.set(item, 'navigation', [items])
+            Ember.set(item, 'active', true)
+            Ember.set(item, 'navigation', [localItems])
         }
         return item
     }
