@@ -65,6 +65,8 @@ App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
             var item = itemFactory(params.idPath)
             if (item) {
                 this.set('title', item.name)
+            } else {
+                this.transitionTo('item', '')
             }
             return item
         },
