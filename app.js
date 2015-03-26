@@ -72,3 +72,9 @@ App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
         },
     })
 }())
+
+App.ItemView = Ember.View.extend({
+    didInsertElement: function() {
+        spanner.span(this.$('.url-content'))
+    },
+})
