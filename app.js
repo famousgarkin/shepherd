@@ -34,6 +34,7 @@ App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
             item.id = item.name
                 .replace(/(\s|[\/])+/g, '-')
                 .replace(/[?]+/g, '')
+                .toLowerCase()
         }
         if (item.items) {
             item.items.forEach(function(item) {
@@ -49,7 +50,7 @@ App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
             item = items[0]
         } else {
             item = items.find(function(item) {
-                return item.id == idPath
+                return item.id == idPath.toLowerCase()
             })
         }
         if (item) {
