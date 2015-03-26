@@ -54,7 +54,7 @@ App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
             })
         }
         if (item) {
-            item.navigation = [items]
+            Ember.set(item, 'navigation', [items])
         }
         return item
     }
