@@ -7,22 +7,16 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <script type="text/x-handlebars" data-template-name="items">
-    {{partial 'nav'}}
-    {{outlet}}
-    </script>
-
-    <script type="text/x-handlebars" data-template-name="_nav">
+    <script type="text/x-handlebars" data-template-name="item">
+    {{#each level in navigation}}
     <ul class="nav nav-tabs">
-        {{#each item in this}}
+        {{#each item in level}}
         <li>
             {{#link-to 'item' item.id}}{{item.name}}{{/link-to}}
         </li>
         {{/each}}
     </ul>
-    </script>
-
-    <script type="text/x-handlebars" data-template-name="item">
+    {{/each}}
     <!-- TODO: replace with spanned iframe -->
     {{name}}
     {{url}}
