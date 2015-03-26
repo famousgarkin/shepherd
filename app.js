@@ -29,25 +29,31 @@ App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
 
 ;(function() {
     var items = Ember.copy(config.items, true)
-    var visitItem = function visitItem(item) {
+
+    var ensureIds = function ensureIds(item, parent) {
         if (item.name) {
             item.id = item.name
                 .replace(/(\s|[\/])+/g, '-')
                 .replace(/[?]+/g, '')
                 .toLowerCase()
+            if (parent && parent.idPath) {
+                item.idPath = [parent.idPath, item.id].join('/')
+            } else {
+                item.idPath = item.id
+            }
         }
         if (item.items) {
-            item.items.forEach(function(item) {
-                visitItem(item)
-            })
+            item.items.forEach(function (item) {
+                ensureIds(item, this)
+            }.bind(item))
         }
     }
-    visitItem({items: items})
+    ensureIds({items: items})
 
     var itemFactory = function(idPath) {
+        // TODO: arbitrary level ID path selection
         idPath = idPath.toLowerCase()
         var item
-        // TODO: arbitrary level selection
         var localItems = Ember.copy(items, true)
         if (idPath === '') {
             item = localItems[0]
