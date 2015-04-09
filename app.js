@@ -56,9 +56,9 @@ App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
         var item
         var localItems = Ember.copy(items, true)
         if (idPath === '') {
-            var item = localItems[0]
+            item = localItems[0]
         } else {
-            var item = localItems.find(function(item) {
+            item = localItems.find(function(item) {
                 return item.id == idPath
             })
         }
