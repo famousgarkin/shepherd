@@ -7,7 +7,7 @@ App.Router.map(function() {
 
 App.TitleHandler = Ember.Mixin.create({
     title: config.title,
-    titleChanged: function() {
+    onTitleChanged: function() {
         var title = this.get('title')
         if (title) {
             title = title + ' - ' + config.title
@@ -43,7 +43,7 @@ App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
             }
         }
         if (item.items) {
-            item.items.forEach(function (item) {
+            item.items.forEach(function(item) {
                 ensureIds(item, this)
             }.bind(item))
         }
