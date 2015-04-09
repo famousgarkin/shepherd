@@ -4,7 +4,7 @@ var jshint = require('gulp-jshint')
 gulp.task('default', ['lint'])
 
 gulp.task('lint', function() {
-    gulp.src([
+    return gulp.src([
         './**/*.js',
         '!./bower_components/**/*',
         '!./node_modules/**/*'
@@ -13,4 +13,5 @@ gulp.task('lint', function() {
         "asi": true
     }))
     .pipe(jshint.reporter('default'))
+    .pipe(jshint.reporter('fail'))
 })
