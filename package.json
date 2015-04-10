@@ -1,7 +1,10 @@
 {
   "private": true,
   "devDependencies": {
-    "gulp": "^3.8.11",
-    "gulp-jshint": "^1.9.2"
+    "jshint": "^2.6.3"
+  },
+  "scripts": {
+    "lint": "jshint *.js **/*.js",
+    "build": "npm run --loglevel silent lint"
   }
 }
