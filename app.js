@@ -43,9 +43,9 @@ App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
             }
         }
         if (item.items) {
-            item.items.forEach(function(item) {
-                ensureIds(item, this)
-            }.bind(item))
+            item.items.forEach(function(child) {
+                ensureIds(child, item)
+            })
         }
     }
     ensureIds({items: items})
@@ -84,6 +84,9 @@ App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
 
 App.ItemView = Ember.View.extend({
     didInsertElement: function() {
-        spanner.span(this.$('.url-content'))
+        var $urlContent = this.$('.url-content')
+        if ($urlContent.length > 0) {
+            spanner.span($urlContent)
+        }
     },
 })
