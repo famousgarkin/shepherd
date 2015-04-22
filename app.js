@@ -33,8 +33,8 @@ App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
     var ensureIds = function ensureIds(item, parent) {
         if (item.name) {
             item.id = item.name
-                .replace(/(\s|[\/])+/g, '-')
-                .replace(/[?]+/g, '')
+                .replace(/([^a-z0-9])+/ig, '-')
+                .replace(/^-|-$/g, '')
                 .toLowerCase()
             if (parent && parent.idPath) {
                 item.idPath = [parent.idPath, item.id].join('/')
