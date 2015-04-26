@@ -12,6 +12,6 @@
     "postinstall": "bower install",
     "lint": "jshint *.js **/*.js",
     "test-qunit": "node-qunit-phantomjs tests/index.html",
-    "test": "npm run lint && npm run test-qunit",
+    "test": "npm run lint && npm run test-qunit"
   }
 }
