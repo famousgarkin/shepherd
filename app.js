@@ -7,17 +7,12 @@ App.Router.map(function() {
 })
 
 App.TitleHandler = Ember.Mixin.create({
-    title: null,
-    onTitleChanged: function() {
-        var title = this.get('title')
+    setTitle: function(title) {
         if (title) {
             title += ' - '
         }
         title += App.get('config.title')
         document.title = title
-    }.observes('title'),
-    beforeModel: function() {
-        this.set('title')
     },
 })
 
@@ -76,7 +71,7 @@ App.ItemRoute = Ember.Route.extend(App.TitleHandler, App.ItemFactory, {
     model: function(params) {
         var item = this.itemFactory(params.idPath)
         if (item) {
-            this.set('title', item.name)
+            this.setTitle(item.name)
         } else {
             this.transitionTo('item', '')
         }
