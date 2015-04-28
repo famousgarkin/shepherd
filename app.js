@@ -1,4 +1,5 @@
 var App = Ember.Application.create({
+    config: config,
 })
 
 App.Router.map(function() {
@@ -6,14 +7,13 @@ App.Router.map(function() {
 })
 
 App.TitleHandler = Ember.Mixin.create({
-    title: config.title,
+    title: null,
     onTitleChanged: function() {
         var title = this.get('title')
         if (title) {
-            title = title + ' - ' + config.title
-        } else {
-            title = config.title
+            title += ' - '
         }
+        title += App.get('config.title')
         document.title = title
     }.observes('title'),
     beforeModel: function() {
@@ -28,7 +28,7 @@ App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
 })
 
 ;(function() {
-    var items = Ember.copy(config.items, true)
+    var items = Ember.copy(App.get('config.items'), true)
 
     var ensureIds = function ensureIds(item, parent) {
         if (item.name) {
