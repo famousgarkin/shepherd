@@ -7,12 +7,15 @@ App.Router.map(function() {
 })
 
 App.TitleHandler = Ember.Mixin.create({
-    setTitle: function(title) {
-        if (title) {
-            title += ' - '
+    _titleFactory: function(subtitle) {
+        var title
+        if (subtitle) {
+            return subtitle + ' - ' + App.config.title
         }
-        title += App.config.title
-        document.title = title
+        return App.config.title
+    },
+    setTitle: function(subtitle) {
+        document.title = this._titleFactory(subtitle)
     },
 })
 
