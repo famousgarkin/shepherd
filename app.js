@@ -11,7 +11,7 @@ App.TitleHandler = Ember.Mixin.create({
         if (title) {
             title += ' - '
         }
-        title += App.get('config.title')
+        title += App.config.title
         document.title = title
     },
 })
@@ -24,7 +24,7 @@ App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
 
 App.ItemFactory = Ember.Mixin.create({
     itemFactory: function() {
-        var items = Ember.copy(App.get('config.items'), true)
+        var items = Ember.copy(App.config.items, true)
 
         var ensureIds = function ensureIds(item, parent) {
             if (item.name) {
