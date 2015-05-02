@@ -1,4 +1,4 @@
-module('routing', {
+module('title', {
     afterEach: function() {
         App.reset()
     },
