@@ -4,7 +4,7 @@ module('title', {
     },
 })
 
-test('document title is created correctly', function(assert) {
+test('TitleHandler._titleFactory', function(assert) {
     var handler = Ember.Object.createWithMixins(App.TitleHandler)
     assert.equal(handler._titleFactory('test'), 'test - Shepherd')
     assert.equal(handler._titleFactory(), 'Shepherd')
