@@ -31,53 +31,65 @@ App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
 })
 
 App.ItemFactory = Ember.Mixin.create({
-    itemFactory: function() {
-        var items = Ember.copy(App.config.items, true)
-
-        var ensureIds = function ensureIds(item, parent) {
-            if (item.name) {
-                item.id = item.name
-                    .replace(/([^a-z0-9])+/ig, '-')
-                    .replace(/^-|-$/g, '')
-                    .toLowerCase()
-                if (parent && parent.idPath) {
-                    item.idPath = [parent.idPath, item.id].join('/')
-                } else {
-                    item.idPath = item.id
-                }
-            }
+    _getItemId: function(name) {
+        return name
+        .replace(/([^a-z0-9])+/ig, '-')
+        .replace(/^-|-$/g, '')
+        .toLowerCase()
+    },
+    _getItemIdPath: function(id, parentIdPath) {
+        if (parentIdPath) {
+            return [id, parentIdPath].join('/')
+        }
+        return id
+    },
+    _ensureItemId: function(item) {
+        item.id = this._getItemId(item.name)
+    },
+    _ensureItemIdPath: function(item, parent) {
+        item.idPath = this._getItemIdPath(item.id, parent ? parent.idPath : null)
+    },
+    _getItems: function(configItems) {
+        var self = this
+        var items = Ember.copy(configItems, true)
+        var visit = function visit(item, parent){
+            self._ensureItemId(item)
+            self._ensureItemIdPath(item, parent)
             if (item.items) {
                 item.items.forEach(function(child) {
-                    ensureIds(child, item)
+                    visit(child, item)
                 })
             }
         }
-        ensureIds({items: items})
-
-        return function(idPath) {
-            // TODO: arbitrary level ID path selection
-            idPath = idPath.toLowerCase()
-            var item
-            var localItems = Ember.copy(items, true)
-            if (idPath === '') {
-                item = localItems[0]
-            } else {
-                item = localItems.find(function(item) {
-                    return item.id == idPath
-                })
-            }
-            if (item) {
-                Ember.set(item, 'active', true)
-                Ember.set(item, 'navigation', [localItems])
-            }
-            return item
+        items.forEach(function(item) {
+            visit(item)
+        })
+        return items
+    },
+    createItem: function(idPath) {
+        var self = this
+        var items = this._getItems(App.config.items)
+        // TODO: arbitrary level ID path selection
+        idPath = idPath.toLowerCase()
+        var item
+        if (idPath === '') {
+            item = items[0]
+        } else {
+            item = items.find(function(item) {
+                return item.id == idPath
+            })
         }
-    }(),
+        if (item) {
+            Ember.set(item, 'active', true)
+            Ember.set(item, 'navigation', [items])
+        }
+        return item
+    },
 })
 
 App.ItemRoute = Ember.Route.extend(App.TitleHandler, App.ItemFactory, {
     model: function(params) {
-        var item = this.itemFactory(params.idPath)
+        var item = this.createItem(params.idPath)
         if (item) {
             this.setTitle(item.name)
         } else {
