@@ -1,5 +1,11 @@
 var App = Ember.Application.create({
-    config: config,
+})
+
+App.initializer({
+    name: 'config',
+    initialize: function(container, app) {
+        app.config = Ember.copy(config)
+    },
 })
 
 App.Router.map(function() {
