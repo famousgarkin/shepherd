@@ -39,7 +39,7 @@ App.ItemFactory = Ember.Mixin.create({
     },
     _getItemIdPath: function(id, parentIdPath) {
         if (parentIdPath) {
-            return [id, parentIdPath].join('/')
+            return [parentIdPath, id].join('/')
         }
         return id
     },

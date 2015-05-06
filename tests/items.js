@@ -6,24 +6,24 @@ module('items', {
 
 test('ItemFactory._getItemId', function(assert) {
     var factory = Ember.Object.createWithMixins(App.ItemFactory)
-    assert.ok(factory._getItemId('some  page  ') === 'some-page')
-    assert.ok(factory._getItemId('some\tpage\t') === 'some-page')
-    assert.ok(factory._getItemId('some\npage\n') === 'some-page')
-    assert.ok(factory._getItemId('some??page??') === 'some-page')
-    assert.ok(factory._getItemId('some//page//') === 'some-page')
-    assert.ok(factory._getItemId('some\\\\page\\\\') === 'some-page')
+    assert.equal(factory._getItemId('some  page  '), 'some-page')
+    assert.equal(factory._getItemId('some\tpage\t'), 'some-page')
+    assert.equal(factory._getItemId('some\npage\n'), 'some-page')
+    assert.equal(factory._getItemId('some??page??'), 'some-page')
+    assert.equal(factory._getItemId('some//page//'), 'some-page')
+    assert.equal(factory._getItemId('some\\\\page\\\\'), 'some-page')
 })
 
 test('ItemFactory._getItemIdPath', function(assert) {
     var factory = Ember.Object.createWithMixins(App.ItemFactory)
-    assert.ok(factory._getItemIdPath('some', 'page') === 'some/page')
-    assert.ok(factory._getItemIdPath('some', 'page/1/2') === 'some/page/1/2')
-    assert.ok(factory._getItemIdPath('some', '') === 'some')
-    assert.ok(factory._getItemIdPath('some', null) === 'some')
-    assert.ok(factory._getItemIdPath('some', undefined) === 'some')
+    assert.equal(factory._getItemIdPath('some', 'page'), 'page/some')
+    assert.equal(factory._getItemIdPath('some', 'page/1/2'), 'page/1/2/some')
+    assert.equal(factory._getItemIdPath('some', ''), 'some')
+    assert.equal(factory._getItemIdPath('some', null), 'some')
+    assert.equal(factory._getItemIdPath('some', undefined), 'some')
 })
 
-test('ItemFactory._ensureItemIds', function(assert) {
+test('ItemFactory._getItems', function(assert) {
     var configItems = [
         {name: 'page 1', url: 'url-1', items: [
             {name: 'page 11', url: 'url-11'},
@@ -42,9 +42,12 @@ test('ItemFactory._ensureItemIds', function(assert) {
     var items = factory._getItems(configItems)
     assert.ok(items !== configItems)
     assert.notOk(configItems[0].hasOwnProperty('id'))
-    assert.ok(items[0].hasOwnProperty('id'))
-    assert.ok(items[0].items[1].items[1].hasOwnProperty('id'))
+    assert.equal(items[0].id, 'page-1')
+    assert.equal(items[0].idPath, 'page-1')
+    assert.equal(items[0].items[1].items[1].id, 'page-112')
+    assert.equal(items[0].items[1].items[1].idPath, 'page-1/page-12/page-112')
     assert.ok(items[1].hasOwnProperty('id'))
     assert.ok(items[1].items[0].hasOwnProperty('id'))
+    assert.ok(items[1].items[0].hasOwnProperty('idPath'))
     assert.ok(items[2].hasOwnProperty('id'))
 })
