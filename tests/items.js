@@ -14,6 +14,13 @@ test('ItemFactory._getItemId', function(assert) {
     assert.equal(factory._getItemId('some\\\\page\\\\'), 'some-page')
 })
 
+test('ItemFactory._getItemIds', function(assert) {
+    var factory = Ember.Object.createWithMixins(App.ItemFactory)
+    assert.deepEqual(factory._getItemIds(''), [''])
+    assert.deepEqual(factory._getItemIds('/'), ['', ''])
+    assert.deepEqual(factory._getItemIds('some/page'), ['some', 'page'])
+})
+
 test('ItemFactory._getItemIdPath', function(assert) {
     var factory = Ember.Object.createWithMixins(App.ItemFactory)
     assert.equal(factory._getItemIdPath('some', 'page'), 'page/some')
@@ -23,13 +30,13 @@ test('ItemFactory._getItemIdPath', function(assert) {
     assert.equal(factory._getItemIdPath('some', undefined), 'some')
 })
 
-test('ItemFactory._getItems', function(assert) {
+test('ItemFactory.getItems', function(assert) {
     var configItems = [
         {name: 'page 1', url: 'url-1', items: [
             {name: 'page 11', url: 'url-11'},
             {name: 'page 12', url: 'url-12', items: [
-                {name: 'page 111', url: 'url-111'},
-                {name: 'page 112', url: 'url-112'},
+                {name: 'page 121', url: 'url-121'},
+                {name: 'page 122', url: 'url-122'},
             ]},
         ]},
         {name: 'page 2', url: 'url-2', items: [
@@ -39,15 +46,45 @@ test('ItemFactory._getItems', function(assert) {
         {name: 'page 3', url: 'url-3'},
     ]
     var factory = Ember.Object.createWithMixins(App.ItemFactory)
-    var items = factory._getItems(configItems)
+    var items = factory.getItems(configItems)
     assert.ok(items !== configItems)
     assert.notOk(configItems[0].hasOwnProperty('id'))
     assert.equal(items[0].id, 'page-1')
     assert.equal(items[0].idPath, 'page-1')
-    assert.equal(items[0].items[1].items[1].id, 'page-112')
-    assert.equal(items[0].items[1].items[1].idPath, 'page-1/page-12/page-112')
+    assert.equal(items[0].items[1].items[1].id, 'page-122')
+    assert.equal(items[0].items[1].items[1].idPath, 'page-1/page-12/page-122')
     assert.ok(items[1].hasOwnProperty('id'))
     assert.ok(items[1].items[0].hasOwnProperty('id'))
     assert.ok(items[1].items[0].hasOwnProperty('idPath'))
     assert.ok(items[2].hasOwnProperty('id'))
+})
+
+test('ItemFactory.getItem', function(assert) {
+    var items = [
+        {id: 'page-1', idPath: 'page-1', url: 'url-1', items: [
+            {id: 'page-11', url: 'url-11'},
+            {id: 'page-12', url: 'url-12', items: [
+                {id: 'page-121', url: 'url-121'},
+                {id: 'page-122', url: 'url-122'},
+            ]},
+        ]},
+        {id: 'page-2', url: 'url-2', items: [
+            {id: 'page-21', url: 'url-21'},
+            {id: 'page-22', url: 'url-22'},
+        ]},
+        {id: 'page-3', idPath: 'page-3', url: 'url-3'},
+    ]
+    var factory = Ember.Object.createWithMixins(App.ItemFactory)
+    var getItem = function(idPath) {
+        return factory.getItem(items, idPath)
+    }
+    console.log('now')
+    assert.equal(getItem('').url, 'url-1')
+    assert.equal(getItem('/'), undefined)
+    assert.equal(getItem('nonexistent-id-path'), undefined)
+    assert.equal(getItem('nonexistent/id/path'), undefined)
+    assert.equal(getItem('page-1').url, 'url-1')
+    var item = getItem('page-1/page-12/page-122')
+    assert.equal(item.url, 'url-1')
+    assert.equal(item.navigation.length, 1)
 })
