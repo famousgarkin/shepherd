@@ -78,7 +78,6 @@ test('ItemFactory.getItem', function(assert) {
     var getItem = function(idPath) {
         return factory.getItem(items, idPath)
     }
-    console.log('now')
     assert.equal(getItem('').url, 'url-1')
     assert.equal(getItem('/'), undefined)
     assert.equal(getItem('nonexistent-id-path'), undefined)
