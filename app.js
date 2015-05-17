@@ -75,24 +75,36 @@ App.ItemFactory = Ember.Mixin.create({
         return items
     },
     getItem: function(items, idPath) {
-        // TODO: arbitrary level ID path selection
-        idPath = idPath.toLowerCase()
-        if (idPath === '') {
-            idPath = items[0].idPath
-        }
-        var item
+        idPath = idPath.toLowerCase() || items[0].idPath
         ids = this._getItemIds(idPath)
-        item = items.find(function(item) {
-            return item.id == ids[0]
-        })
-        if (item) {
-            item.active = true
-            return App.Item.create({
-                name: item.name,
-                url: item.url,
-                navigation: [items],
-            })
-        }
+        var item = function visit(items, ids, navigation) {
+            navigation = navigation || []
+            var item
+            var id = ids.shift()
+            if (id === undefined) {
+                item = items[0]
+            } else {
+                for (var i = 0; i < items.length; i++) {
+                    if (items[i].id === id) {
+                        item = items[i]
+                        break
+                    }
+                }
+            }
+            if (item) {
+                item.active = true
+                navigation.push(items)
+                if (item.items) {
+                    return visit(item.items, ids, navigation)
+                }
+                return App.Item.create({
+                    name: item.name,
+                    url: item.url,
+                    navigation: navigation,
+                })
+            }
+        }(items, ids)
+        return item
     },
 })
 

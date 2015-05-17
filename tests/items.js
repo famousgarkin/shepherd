@@ -72,18 +72,19 @@ test('ItemFactory.getItem', function(assert) {
             {id: 'page-21', url: 'url-21'},
             {id: 'page-22', url: 'url-22'},
         ]},
-        {id: 'page-3', idPath: 'page-3', url: 'url-3'},
+        {id: 'page-3', url: 'url-3'},
     ]
     var factory = Ember.Object.createWithMixins(App.ItemFactory)
     var getItem = function(idPath) {
         return factory.getItem(items, idPath)
     }
-    assert.equal(getItem('').url, 'url-1')
     assert.equal(getItem('/'), undefined)
     assert.equal(getItem('nonexistent-id-path'), undefined)
     assert.equal(getItem('nonexistent/id/path'), undefined)
-    assert.equal(getItem('page-1').url, 'url-1')
+    assert.equal(getItem('').url, 'url-11')
+    assert.equal(getItem('page-1').url, 'url-11')
+    assert.equal(getItem('page-1/page-12').url, 'url-121')
     var item = getItem('page-1/page-12/page-122')
-    assert.equal(item.url, 'url-1')
-    assert.equal(item.navigation.length, 1)
+    assert.equal(item.url, 'url-122')
+    assert.equal(item.navigation.length, 3)
 })
