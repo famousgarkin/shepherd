@@ -67,7 +67,9 @@ App.ItemFactory = Ember.Mixin.create({
                 self._ensureItemIdPath(item, parent)
                 if (item.items) {
                     item.items.forEach(function(child) {
-                        visit(child, item)
+                        if (child) {
+                            visit(child, item)
+                        }
                     })
                 }
             }(item))
