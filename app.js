@@ -31,7 +31,7 @@ App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
 })
 
 App.Item = Ember.Object.extend({
-    name: null,
+    title: null,
     url: null,
     navigation: [],
 })
@@ -78,8 +78,9 @@ App.ItemFactory = Ember.Mixin.create({
     getItem: function(items, idPath) {
         idPath = idPath.toLowerCase() || items[0].idPath
         ids = this._getItemIds(idPath)
-        var item = function visit(items, ids, navigation) {
+        var item = function visit(items, ids, navigation, title) {
             navigation = navigation || []
+            title = title || []
             var item
             var id = ids.shift()
             if (id === undefined) {
@@ -95,11 +96,12 @@ App.ItemFactory = Ember.Mixin.create({
             if (item) {
                 item.active = true
                 navigation.push(items)
+                title.unshift(item.name)
                 if (item.items) {
-                    return visit(item.items, ids, navigation)
+                    return visit(item.items, ids, navigation, title)
                 }
                 return App.Item.create({
-                    name: item.name,
+                    title: title.join(' - '),
                     url: item.url,
                     navigation: navigation,
                 })
@@ -116,7 +118,7 @@ App.ItemRoute = Ember.Route.extend(App.TitleHandler, App.ItemFactory, {
         if (!item) {
             return this.transitionTo('item', '')
         }
-        this.setTitle(item.name)
+        this.setTitle(item.title)
         return item
     },
 })

@@ -61,11 +61,11 @@ test('ItemFactory.getItems', function(assert) {
 
 test('ItemFactory.getItem', function(assert) {
     var items = [
-        {id: 'page-1', idPath: 'page-1', url: 'url-1', items: [
+        {name: 'Page 1', id: 'page-1', idPath: 'page-1', url: 'url-1', items: [
             {id: 'page-11', url: 'url-11'},
-            {id: 'page-12', url: 'url-12', items: [
+            {name: 'Page 12', id: 'page-12', url: 'url-12', items: [
                 {id: 'page-121', url: 'url-121'},
-                {id: 'page-122', url: 'url-122'},
+                {name: 'Page 122', id: 'page-122', url: 'url-122'},
             ]},
         ]},
         {id: 'page-2', url: 'url-2', items: [
@@ -75,16 +75,14 @@ test('ItemFactory.getItem', function(assert) {
         {id: 'page-3', url: 'url-3'},
     ]
     var factory = Ember.Object.createWithMixins(App.ItemFactory)
-    var getItem = function(idPath) {
-        return factory.getItem(items, idPath)
-    }
-    assert.equal(getItem('/'), undefined)
-    assert.equal(getItem('nonexistent-id-path'), undefined)
-    assert.equal(getItem('nonexistent/id/path'), undefined)
-    assert.equal(getItem('').url, 'url-11')
-    assert.equal(getItem('page-1').url, 'url-11')
-    assert.equal(getItem('page-1/page-12').url, 'url-121')
-    var item = getItem('page-1/page-12/page-122')
+    assert.equal(factory.getItem(items, '/'), undefined)
+    assert.equal(factory.getItem(items, 'nonexistent-id-path'), undefined)
+    assert.equal(factory.getItem(items, 'nonexistent/id/path'), undefined)
+    assert.equal(factory.getItem(items, '').url, 'url-11')
+    assert.equal(factory.getItem(items, 'page-1').url, 'url-11')
+    assert.equal(factory.getItem(items, 'page-1/page-12').url, 'url-121')
+    var item = factory.getItem(items, 'page-1/page-12/page-122')
+    assert.equal(item.title, 'Page 122 - Page 12 - Page 1')
     assert.equal(item.url, 'url-122')
     assert.equal(item.navigation.length, 3)
 })
