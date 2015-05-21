@@ -60,20 +60,19 @@ App.ItemFactory = Ember.Mixin.create({
     },
     getItems: function(configItems) {
         var self = this
-        var items = Ember.copy(configItems, true)
-        items.forEach(function(item) {
-            ;(function visit(item, parent){
-                self._ensureItemId(item)
-                self._ensureItemIdPath(item, parent)
-                if (item.items) {
-                    item.items.forEach(function(child) {
-                        if (child) {
-                            visit(child, item)
-                        }
-                    })
+        var items = function visit(items, parent) {
+            items = items.filter(function(item) {
+                if (item) {
+                    self._ensureItemId(item)
+                    self._ensureItemIdPath(item, parent)
+                    if (item.items) {
+                        item.items = visit(item.items, item)
+                    }
+                    return item
                 }
-            }(item))
-        })
+            })
+            return items
+        }(Ember.copy(configItems, true))
         return items
     },
     getItem: function(items, idPath) {
