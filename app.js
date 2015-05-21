@@ -122,15 +122,6 @@ App.ItemRoute = Ember.Route.extend(App.TitleHandler, App.ItemFactory, {
     },
 })
 
-App.ItemView = Ember.View.extend({
-    didInsertElement: function() {
-        var $urlContent = this.$('.url-content')
-        if ($urlContent.length > 0) {
-            spanner.span($urlContent)
-        }
-    },
-})
-
 App.RemoteContentComponent = Ember.Component.extend({
     tagName: 'iframe',
     // NOTE: fixes dying on IE8 when appending text node with default layout
@@ -139,4 +130,7 @@ App.RemoteContentComponent = Ember.Component.extend({
     attributeBindings: ['frameborder', 'url:src'],
     frameborder: 0,
     url: null,
+    didInsertElement: function() {
+        spanner.span(this.$())
+    },
 })
