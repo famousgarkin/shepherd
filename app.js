@@ -130,3 +130,13 @@ App.ItemView = Ember.View.extend({
         }
     },
 })
+
+App.RemoteContentComponent = Ember.Component.extend({
+    tagName: 'iframe',
+    // NOTE: fixes dying on IE8 when appending text node with default layout
+    defaultLayout: null,
+    classNames: ['url-content'],
+    attributeBindings: ['frameborder', 'url:src'],
+    frameborder: 0,
+    url: null,
+})
