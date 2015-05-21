@@ -28,3 +28,5 @@ It is but to scratch an itch with a load of dangling intranet endpoints that nee
         ]
 
 2. Host as a static website
+
+3. Optionally override CSS via `custom.css`
