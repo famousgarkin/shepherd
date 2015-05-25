@@ -140,6 +140,6 @@ App.RemoteContentComponent = Ember.Component.extend({
             element.height(height)
         }
         span()
-        this.$(window).resize(span)
+        Ember.$(window).resize(span)
     },
 })
