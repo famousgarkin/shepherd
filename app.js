@@ -132,6 +132,14 @@ App.RemoteContentComponent = Ember.Component.extend({
     frameborder: 0,
     url: null,
     didInsertElement: function() {
-        spanner.span(this.$())
+        var element = this.$()
+        var span = function() {
+            var width = $(window).width() - element.offset().left
+            element.width(width)
+            var height = $(window).height() - element.offset().top
+            element.height(height)
+        }
+        span()
+        this.$(window).resize(span)
     },
 })

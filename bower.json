@@ -4,7 +4,6 @@
   "dependencies": {
     "bootstrap": "~3.3.2",
     "ember": "~1.10.0",
-    "handlebars": "~3.0.0",
-    "spanner": "https://github.com/famousgarkin/spanner.git#1.0.0"
+    "handlebars": "~3.0.0"
   }
 }
