@@ -4,6 +4,7 @@
   "dependencies": {
     "bootstrap": "~3.3.2",
     "ember": "~1.10.0",
-    "handlebars": "~3.0.0"
+    "handlebars": "~3.0.0",
+    "jquery": "~1.11.3"
   }
 }
