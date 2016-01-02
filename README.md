@@ -6,7 +6,7 @@ Shepherd is a single-page application without a backend that provides a configur
 
 It is but to scratch an itch with a load of dangling intranet endpoints that needed consolidation.
 
-![](shepherd.png)
+![](assets/shepherd.png)
 
 # Usage
 
