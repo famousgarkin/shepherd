@@ -77,7 +77,7 @@ App.ItemFactory = Ember.Mixin.create({
 	},
 	getItem: function(items, idPath) {
 		idPath = idPath.toLowerCase() || items[0].idPath
-		ids = this._getItemIds(idPath)
+		var ids = this._getItemIds(idPath)
 		var item = function visit(items, ids, navigation, title) {
 			navigation = navigation || []
 			title = title || []
