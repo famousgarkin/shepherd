@@ -1,4 +1,6 @@
-# Shepherd [![build status](https://travis-ci.org/famousgarkin/shepherd.svg)](https://travis-ci.org/famousgarkin/shepherd)
+# Shepherd
+
+[![build status](https://travis-ci.org/famousgarkin/shepherd.svg)](https://travis-ci.org/famousgarkin/shepherd)
 
 > Herd the scattered, disparate, legacy tools and pages under a common interface.
 
@@ -8,7 +10,7 @@ It is but to scratch an itch with a load of dangling intranet endpoints that nee
 
 ![](assets/shepherd.png)
 
-# Usage
+## Usage
 
 1. Set *title* and navigation *items* in `config.js`:
 
