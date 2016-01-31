@@ -8,14 +8,12 @@
     "eslint": "^1.10.3",
     "eslint-config-defaults": "^8.0.2",
     "eslint-plugin-react": "^3.15.0",
-    "live-server": "^0.7.1",
     "node-qunit-phantomjs": "^1.2.0",
     "qunitjs": "^1.18.0"
   },
   "scripts": {
     "postinstall": "bower install",
     "lint": "eslint *.js tests .eslintrc.js",
-    "test": "node-qunit-phantomjs tests/index.html",
-    "start": "live-server --port=5000"
+    "test": "node-qunit-phantomjs tests/index.html"
   }
 }
