@@ -2,25 +2,21 @@ var Shepherd = Shepherd || {}
 
 Shepherd.config = Shepherd.config || null
 
+Shepherd.titleFactory = function (subtitle) {
+	if (subtitle) {
+		return [subtitle, Shepherd.config.title].join(' - ')
+	}
+	return Shepherd.config.title
+}
+
+var App = Ember.Application.create({
 })
 
 App.Router.map(function() {
 	this.resource('item', {path: '/*idPath'})
 })
 
-App.TitleHandler = Ember.Mixin.create({
-	_titleFactory: function(subtitle) {
-		if (subtitle) {
-			return [subtitle, App.config.title].join(' - ')
-		}
-		return App.config.title
-	},
-	setTitle: function(subtitle) {
-		document.title = this._titleFactory(subtitle)
-	},
-})
-
-App.IndexRoute = Ember.Route.extend(App.TitleHandler, {
+App.IndexRoute = Ember.Route.extend({
 	redirect: function() {
 		this.transitionTo('item', '')
 	},
@@ -107,14 +103,14 @@ App.ItemFactory = Ember.Mixin.create({
 	},
 })
 
-App.ItemRoute = Ember.Route.extend(App.TitleHandler, App.ItemFactory, {
+App.ItemRoute = Ember.Route.extend(App.ItemFactory, {
 	model: function(params) {
 		var items = this.getItems(Shepherd.config.items)
 		var item = this.getItem(items, params.idPath)
 		if (!item) {
 			return this.transitionTo('item', '')
 		}
-		this.setTitle(item.title)
+		document.title = Shepherd.titleFactory(item.title)
 		return item
 	},
 })
