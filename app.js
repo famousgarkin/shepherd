@@ -1,11 +1,7 @@
-var App = Ember.Application.create({
-})
+var Shepherd = Shepherd || {}
 
-App.initializer({
-	name: 'config',
-	initialize: function(container, app) {
-		app.config = Ember.copy(config)
-	},
+Shepherd.config = Shepherd.config || null
+
 })
 
 App.Router.map(function() {
@@ -113,7 +109,7 @@ App.ItemFactory = Ember.Mixin.create({
 
 App.ItemRoute = Ember.Route.extend(App.TitleHandler, App.ItemFactory, {
 	model: function(params) {
-		var items = this.getItems(App.config.items)
+		var items = this.getItems(Shepherd.config.items)
 		var item = this.getItem(items, params.idPath)
 		if (!item) {
 			return this.transitionTo('item', '')
