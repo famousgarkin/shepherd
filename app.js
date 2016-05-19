@@ -9,53 +9,41 @@ Shepherd.titleFactory = function (subtitle) {
 	return Shepherd.config.title
 }
 
-Shepherd.Item = function (title, url, navigation) {
-	this.title = title
-	this.url = url
-	this.navigation = navigation
-}
+Shepherd.Item = function (configItem, parent) {
+	this.name = configItem.name
+	this.url = configItem.url
+	this.items = configItem.items
 
-Shepherd.ItemFactory = function () {
+	this.id = Shepherd.Item._getId(this.name)
+
+	this.idPath = Shepherd.Item._getIdPath(this.id, parent ? parent.idPath : null)
 }
-Shepherd.ItemFactory.prototype._getItemId = function(name) {
+Shepherd.Item._getId = function (name) {
 	return name
 	.replace(/([^a-z0-9])+/ig, '-')
 	.replace(/^-|-$/g, '')
 	.toLowerCase()
 }
+Shepherd.Item._getIdPath = function (id, parentIdPath) {
+	return parentIdPath ? [parentIdPath, id].join('/') : id
+}
 
+Shepherd.ItemFactory = function () {
+}
 Shepherd.ItemFactory.prototype._getItemIds = function(idPath) {
 	return idPath.split('/')
 }
-Shepherd.ItemFactory.prototype._getItemIdPath = function(id, parentIdPath) {
-	if (parentIdPath) {
-		return [parentIdPath, id].join('/')
-	}
-	return id
-}
-Shepherd.ItemFactory.prototype._ensureItemId = function(item) {
-	item.id = this._getItemId(item.name)
-}
-Shepherd.ItemFactory.prototype._ensureItemIdPath = function(item, parent) {
-	item.idPath = this._getItemIdPath(item.id, parent ? parent.idPath : null)
-}
 Shepherd.ItemFactory.prototype.getItems = function(configItems) {
-	var self = this
-	var items = function visit(items, parent) {
-		items = items.filter(function(item) {
-			if (item) {
-				self._ensureItemId(item)
-				self._ensureItemIdPath(item, parent)
-				if (item.items) {
-					item.items = visit(item.items, item)
-				}
-				return item
+	return (function visit(configItems, parent) {
+		return configItems.map(function(configItem) {
+			var item = new Shepherd.Item(configItem, parent)
+			if (item.items) {
+				item.items = visit(item.items, item)
 			}
+			return item
 		})
-		return items
 	// TODO: make Ember independent
-	}(Ember.copy(configItems, true))
-	return items
+	})(Ember.copy(configItems, true))
 }
 Shepherd.ItemFactory.prototype.getItem = function(items, idPath) {
 	idPath = idPath.toLowerCase() || items[0].idPath
@@ -82,7 +70,11 @@ Shepherd.ItemFactory.prototype.getItem = function(items, idPath) {
 			if (item.items) {
 				return visit(item.items, ids, navigation, title)
 			}
-			return new Shepherd.Item(title.join(' - '), item.url, navigation)
+			return {
+				title: title.join(' - '),
+				url: item.url,
+				navigation: navigation,
+			}
 		}
 	}(items, ids)
 	return item
@@ -99,6 +91,12 @@ App.IndexRoute = Ember.Route.extend({
 	redirect: function() {
 		this.transitionTo('item', '')
 	},
+})
+
+App.Item = Ember.Object.extend({
+	title: null,
+	url: null,
+	navigation: [],
 })
 
 App.ItemRoute = Ember.Route.extend({

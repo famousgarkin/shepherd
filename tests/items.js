@@ -4,30 +4,29 @@ module('items', {
 	},
 })
 
-test('Shepherd.ItemFactory._getItemId', function(assert) {
-	var factory = new Shepherd.ItemFactory()
-	assert.equal(factory._getItemId('some  page  '), 'some-page')
-	assert.equal(factory._getItemId('some\tpage\t'), 'some-page')
-	assert.equal(factory._getItemId('some\npage\n'), 'some-page')
-	assert.equal(factory._getItemId('some??page??'), 'some-page')
-	assert.equal(factory._getItemId('some//page//'), 'some-page')
-	assert.equal(factory._getItemId('some\\\\page\\\\'), 'some-page')
+test('Shepherd.Item._getId', function (assert) {
+	assert.equal(Shepherd.Item._getId('some  page  '), 'some-page')
+	assert.equal(Shepherd.Item._getId('some\tpage\t'), 'some-page')
+	assert.equal(Shepherd.Item._getId('some\npage\n'), 'some-page')
+	assert.equal(Shepherd.Item._getId('some??page??'), 'some-page')
+	assert.equal(Shepherd.Item._getId('some//page//'), 'some-page')
+	assert.equal(Shepherd.Item._getId('some\\\\page\\\\'), 'some-page')
 })
+
+test('Shepherd.ItemFactory._getItemIdPath', function(assert) {
+	assert.equal(Shepherd.Item._getIdPath('some', 'page'), 'page/some')
+	assert.equal(Shepherd.Item._getIdPath('some', 'page/1/2'), 'page/1/2/some')
+	assert.equal(Shepherd.Item._getIdPath('some', ''), 'some')
+	assert.equal(Shepherd.Item._getIdPath('some', null), 'some')
+	assert.equal(Shepherd.Item._getIdPath('some', undefined), 'some')
+})
+
 
 test('Shepherd.ItemFactory._getItemIds', function(assert) {
 	var factory = new Shepherd.ItemFactory()
 	assert.deepEqual(factory._getItemIds(''), [''])
 	assert.deepEqual(factory._getItemIds('/'), ['', ''])
 	assert.deepEqual(factory._getItemIds('some/page'), ['some', 'page'])
-})
-
-test('Shepherd.ItemFactory._getItemIdPath', function(assert) {
-	var factory = new Shepherd.ItemFactory()
-	assert.equal(factory._getItemIdPath('some', 'page'), 'page/some')
-	assert.equal(factory._getItemIdPath('some', 'page/1/2'), 'page/1/2/some')
-	assert.equal(factory._getItemIdPath('some', ''), 'some')
-	assert.equal(factory._getItemIdPath('some', null), 'some')
-	assert.equal(factory._getItemIdPath('some', undefined), 'some')
 })
 
 test('Shepherd.ItemFactory.getItems', function(assert) {
