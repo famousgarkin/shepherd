@@ -22,14 +22,13 @@ test('Shepherd.ItemFactory._getItemIdPath', function(assert) {
 })
 
 
-test('Shepherd.ItemFactory._getItemIds', function(assert) {
-	var factory = new Shepherd.ItemFactory()
-	assert.deepEqual(factory._getItemIds(''), [''])
-	assert.deepEqual(factory._getItemIds('/'), ['', ''])
-	assert.deepEqual(factory._getItemIds('some/page'), ['some', 'page'])
+test('Shepherd.ItemFactory get item IDs from ID path', function(assert) {
+	assert.deepEqual(''.split('/'), [''])
+	assert.deepEqual('/'.split('/'), ['', ''])
+	assert.deepEqual('some/page'.split('/'), ['some', 'page'])
 })
 
-test('Shepherd.ItemFactory.getItems', function(assert) {
+test('Shepherd.ItemFactory._getItems', function(assert) {
 	var configItems = [
 		{name: 'page 1', url: 'url-1', items: [
 			{name: 'page 11', url: 'url-11'},
@@ -44,8 +43,8 @@ test('Shepherd.ItemFactory.getItems', function(assert) {
 		]},
 		{name: 'page 3', url: 'url-3'},
 	]
-	var factory = new Shepherd.ItemFactory()
-	var items = factory.getItems(configItems)
+	var factory = new Shepherd.ItemFactory(configItems)
+	var items = factory._getItems()
 	assert.ok(items !== configItems)
 	assert.notOk(configItems[0].hasOwnProperty('id'))
 	assert.equal(items[0].id, 'page-1')
@@ -59,28 +58,28 @@ test('Shepherd.ItemFactory.getItems', function(assert) {
 })
 
 test('Shepherd.ItemFactory.getItem', function(assert) {
-	var items = [
-		{name: 'Page 1', id: 'page-1', idPath: 'page-1', url: 'url-1', items: [
-			{id: 'page-11', url: 'url-11'},
-			{name: 'Page 12', id: 'page-12', url: 'url-12', items: [
-				{id: 'page-121', url: 'url-121'},
-				{name: 'Page 122', id: 'page-122', url: 'url-122'},
+	var configItems = [
+		{name: 'Page 1', url: 'url-1', items: [
+			{name: 'Page 11', url: 'url-11'},
+			{name: 'Page 12', url: 'url-12', items: [
+				{name: 'Page 121', url: 'url-121'},
+				{name: 'Page 122', url: 'url-122'},
 			]},
 		]},
-		{id: 'page-2', url: 'url-2', items: [
-			{id: 'page-21', url: 'url-21'},
-			{id: 'page-22', url: 'url-22'},
+		{name: 'Page 2', url: 'url-2', items: [
+			{name: 'Page 21', url: 'url-21'},
+			{name: 'Page 22', url: 'url-22'},
 		]},
-		{id: 'page-3', url: 'url-3'},
+		{name: 'Page 3', url: 'url-3'},
 	]
-	var factory = new Shepherd.ItemFactory()
-	assert.equal(factory.getItem(items, '/'), undefined)
-	assert.equal(factory.getItem(items, 'nonexistent-id-path'), undefined)
-	assert.equal(factory.getItem(items, 'nonexistent/id/path'), undefined)
-	assert.equal(factory.getItem(items, '').url, 'url-11')
-	assert.equal(factory.getItem(items, 'page-1').url, 'url-11')
-	assert.equal(factory.getItem(items, 'page-1/page-12').url, 'url-121')
-	var item = factory.getItem(items, 'page-1/page-12/page-122')
+	var factory = new Shepherd.ItemFactory(configItems)
+	assert.equal(factory.getItem('/'), undefined)
+	assert.equal(factory.getItem('nonexistent-id-path'), undefined)
+	assert.equal(factory.getItem('nonexistent/id/path'), undefined)
+	assert.equal(factory.getItem('').url, 'url-11')
+	assert.equal(factory.getItem('page-1').url, 'url-11')
+	assert.equal(factory.getItem('page-1/page-12').url, 'url-121')
+	var item = factory.getItem('page-1/page-12/page-122')
 	assert.equal(item.title, 'Page 122 - Page 12 - Page 1')
 	assert.equal(item.url, 'url-122')
 	assert.equal(item.navigation.length, 3)
