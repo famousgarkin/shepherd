@@ -3,10 +3,11 @@ var Shepherd = Shepherd || {}
 Shepherd.config = Shepherd.config || null
 
 Shepherd.titleFactory = function (subtitle) {
+	var title = [Shepherd.config.title]
 	if (subtitle) {
-		return [subtitle, Shepherd.config.title].join(' - ')
+		title.unshift(subtitle)
 	}
-	return Shepherd.config.title
+	return title.join(' - ')
 }
 
 Shepherd.Item = function (configItem, parent) {
