@@ -4,8 +4,8 @@ module('items', {
 	},
 })
 
-test('ItemFactory._getItemId', function(assert) {
-	var factory = Ember.Object.createWithMixins(App.ItemFactory)
+test('Shepherd.ItemFactory._getItemId', function(assert) {
+	var factory = new Shepherd.ItemFactory()
 	assert.equal(factory._getItemId('some  page  '), 'some-page')
 	assert.equal(factory._getItemId('some\tpage\t'), 'some-page')
 	assert.equal(factory._getItemId('some\npage\n'), 'some-page')
@@ -14,15 +14,15 @@ test('ItemFactory._getItemId', function(assert) {
 	assert.equal(factory._getItemId('some\\\\page\\\\'), 'some-page')
 })
 
-test('ItemFactory._getItemIds', function(assert) {
-	var factory = Ember.Object.createWithMixins(App.ItemFactory)
+test('Shepherd.ItemFactory._getItemIds', function(assert) {
+	var factory = new Shepherd.ItemFactory()
 	assert.deepEqual(factory._getItemIds(''), [''])
 	assert.deepEqual(factory._getItemIds('/'), ['', ''])
 	assert.deepEqual(factory._getItemIds('some/page'), ['some', 'page'])
 })
 
-test('ItemFactory._getItemIdPath', function(assert) {
-	var factory = Ember.Object.createWithMixins(App.ItemFactory)
+test('Shepherd.ItemFactory._getItemIdPath', function(assert) {
+	var factory = new Shepherd.ItemFactory()
 	assert.equal(factory._getItemIdPath('some', 'page'), 'page/some')
 	assert.equal(factory._getItemIdPath('some', 'page/1/2'), 'page/1/2/some')
 	assert.equal(factory._getItemIdPath('some', ''), 'some')
@@ -30,7 +30,7 @@ test('ItemFactory._getItemIdPath', function(assert) {
 	assert.equal(factory._getItemIdPath('some', undefined), 'some')
 })
 
-test('ItemFactory.getItems', function(assert) {
+test('Shepherd.ItemFactory.getItems', function(assert) {
 	var configItems = [
 		{name: 'page 1', url: 'url-1', items: [
 			{name: 'page 11', url: 'url-11'},
@@ -45,7 +45,7 @@ test('ItemFactory.getItems', function(assert) {
 		]},
 		{name: 'page 3', url: 'url-3'},
 	]
-	var factory = Ember.Object.createWithMixins(App.ItemFactory)
+	var factory = new Shepherd.ItemFactory()
 	var items = factory.getItems(configItems)
 	assert.ok(items !== configItems)
 	assert.notOk(configItems[0].hasOwnProperty('id'))
@@ -59,7 +59,7 @@ test('ItemFactory.getItems', function(assert) {
 	assert.ok(items[2].hasOwnProperty('id'))
 })
 
-test('ItemFactory.getItem', function(assert) {
+test('Shepherd.ItemFactory.getItem', function(assert) {
 	var items = [
 		{name: 'Page 1', id: 'page-1', idPath: 'page-1', url: 'url-1', items: [
 			{id: 'page-11', url: 'url-11'},
@@ -74,7 +74,7 @@ test('ItemFactory.getItem', function(assert) {
 		]},
 		{id: 'page-3', url: 'url-3'},
 	]
-	var factory = Ember.Object.createWithMixins(App.ItemFactory)
+	var factory = new Shepherd.ItemFactory()
 	assert.equal(factory.getItem(items, '/'), undefined)
 	assert.equal(factory.getItem(items, 'nonexistent-id-path'), undefined)
 	assert.equal(factory.getItem(items, 'nonexistent/id/path'), undefined)
