@@ -2,14 +2,6 @@ var Shepherd = Shepherd || {}
 
 Shepherd.config = Shepherd.config || null
 
-Shepherd.titleFactory = function (subtitle) {
-	var title = [Shepherd.config.title]
-	if (subtitle) {
-		title.unshift(subtitle)
-	}
-	return title.join(' - ')
-}
-
 Shepherd.Item = function (configItem, parent) {
 	this.name = configItem.name
 	this.url = configItem.url
@@ -104,7 +96,7 @@ App.ItemRoute = Ember.Route.extend({
 		if (!item) {
 			return this.transitionTo('item', '')
 		}
-		document.title = Shepherd.titleFactory(item.title)
+		document.title = [item.title, Shepherd.config.title].join(' - ')
 		return item
 	},
 })
