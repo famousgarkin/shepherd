@@ -10,25 +10,11 @@
 	<link rel="icon" href="assets/favicon.ico">
 </head>
 <body>
-	<script type="text/x-handlebars" data-template-name="item">
-	{{#each level in navigation}}
-	<ul class="nav nav-tabs">
-		{{#each item in level}}
-		<li {{bind-attr class="item.active"}}>
-			{{#link-to 'item' item.idPath}}{{item.name}}{{/link-to}}
-		</li>
-		{{/each}}
-	</ul>
-	{{/each}}
-
-	{{remote-content url=url}}
-	</script>
+	<div id="shepherd">
+	</div>
 
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="bower_components/handlebars/handlebars.min.js"></script>
-	<script src="bower_components/ember/ember-template-compiler.js"></script>
-	<script src="bower_components/ember/ember.prod.js"></script>
 
 	<script src="config.js"></script>
 	<script src="build/bundle.js"></script>

@@ -21,6 +21,7 @@ ItemFactory.prototype.getItem = function(idPath) {
 	var items = this._getItems()
 	idPath = idPath.toLowerCase() || items[0].idPath
 	var ids = idPath.split('/')
+
 	return (function visit(items, ids, navigation, title) {
 		navigation = navigation || []
 		title = title || []
@@ -36,6 +37,7 @@ ItemFactory.prototype.getItem = function(idPath) {
 				}
 			}
 		}
+
 		if (item) {
 			item.active = true
 			navigation.push(items)
