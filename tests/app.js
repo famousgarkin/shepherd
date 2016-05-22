@@ -27,3 +27,11 @@ test('nonexistent ID path redirects to no ID path', function(assert) {
 	check('/nonexistent-ID-path')
 	check('/nonexistent/ID/path')
 })
+
+test('document title on initial page load is set correctly', function(assert) {
+	document.title = 'test'
+	visit('/')
+	andThen(function() {
+		assert.equal(document.title, 'Readme - Shepherd')
+	})
+})
