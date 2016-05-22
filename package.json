@@ -1,19 +1,21 @@
 {
   "private": true,
   "dependencies": {
-    "bower": "^1.4.1"
+    "bower": "^1.4.1",
+    "browserify": "^13.0.1"
   },
   "devDependencies": {
-    "babel-eslint": "^5.0.0-beta6",
-    "eslint": "^1.10.3",
-    "eslint-config-defaults": "^8.0.2",
-    "eslint-plugin-react": "^3.15.0",
+    "eslint": "^2.10.2",
+    "jasmine": "^2.4.1",
     "node-qunit-phantomjs": "^1.2.0",
-    "qunitjs": "^1.18.0"
+    "qunitjs": "^1.18.0",
+    "watchify": "^3.7.0"
   },
   "scripts": {
-    "postinstall": "bower install",
-    "lint": "eslint *.js tests .eslintrc.js",
-    "test": "node-qunit-phantomjs tests/index.html"
+    "postinstall": "bower install && npm run build",
+    "lint": "eslint src tests .eslintrc.js",
+    "test": "jasmine && node-qunit-phantomjs tests/index.html",
+    "build": "browserify src/app.js -o build/bundle.js",
+    "watch": "watchify src/app.js -o build/bundle.js -dv"
   }
 }

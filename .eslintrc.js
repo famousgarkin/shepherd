@@ -1,7 +1,7 @@
 module.exports = {
-	extends: 'defaults/configurations/airbnb/es6-react',
+	extends: 'eslint:recommended',
 	rules: {
-		indent: [2, 'tab'],
-		semi: [2, 'never'],
+		semi: ['error', 'never'],
+		indent: ['error', 'tab'],
 	},
 }
