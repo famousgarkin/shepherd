@@ -48,8 +48,14 @@ var Shepherd = React.createClass({
 		this.navigate()
 		window.addEventListener('hashchange', this.navigate)
 
-		// delay resize until rendered properly
-		setTimeout(this.spanFrame, 0)
+		// delay initial frame resize until rendered properly
+		setTimeout(function () {
+			if (window.requestAnimationFrame) {
+				window.requestAnimationFrame(this.spanFrame)
+			} else {
+				this.spanFrame()
+			}
+		}.bind(this), 0)
 		window.addEventListener('resize', this.spanFrame)
 	},
 
