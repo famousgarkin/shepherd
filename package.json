@@ -1,21 +1,23 @@
 {
   "private": true,
   "dependencies": {
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.3.0",
     "bower": "^1.4.1",
-    "browserify": "^13.0.1"
+    "browserify": "^13.0.1",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
   },
   "devDependencies": {
     "eslint": "^2.10.2",
     "jasmine": "^2.4.1",
-    "node-qunit-phantomjs": "^1.2.0",
-    "qunitjs": "^1.18.0",
     "watchify": "^3.7.0"
   },
   "scripts": {
     "postinstall": "bower install && npm run build",
     "lint": "eslint src tests .eslintrc.js",
-    "test": "jasmine && node-qunit-phantomjs tests/index.html",
-    "build": "browserify src/app.js -o build/bundle.js",
-    "watch": "watchify src/app.js -o build/bundle.js -dv"
+    "test": "jasmine",
+    "build": "browserify src/main.js -o build/bundle.js -t [babelify --presets react]",
+    "watch": "watchify src/main.js -o build/bundle.js -t [babelify --presets react] -dv"
   }
 }

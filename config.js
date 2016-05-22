@@ -1,6 +1,4 @@
-var Shepherd = Shepherd || {}
-
-Shepherd.config = {
+var config = {
 	title: 'Shepherd',
 	items: [
 		{name: 'Readme', url: 'README.md'},
