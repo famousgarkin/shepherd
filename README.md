@@ -12,25 +12,20 @@ It is but to scratch an itch with a load of dangling intranet endpoints that nee
 
 ## Usage
 
-1. Set *title* and navigation *items* in `config.js`:
-
+* Configure via `config.js`:
 	```js
-	var config = {}
-	
-	config.title = 'Shepherd'
-	
-	config.items = [
-		{name: 'Readme', url: 'README.md'},
-		{name: 'Sample', url: 'sample', items: [
-			{name: 'Sample 1', url: 'sample-content-1'},
-			{name: 'Sample 2', url: 'sample-content-2', items: [
-				{name: 'Sample 2.1', url: 'sample-content-2.1'},
-				{name: 'Sample 2.2', url: 'sample-content-2.2'},
+	var config = {
+		title: 'Shepherd',
+		items: [
+			{name: 'Readme', url: 'README.md'},
+			{name: 'Sample', url: 'sample', items: [
+				{name: 'Sample 1', url: 'sample-content-1'},
+				{name: 'Sample 2', url: 'sample-content-2', items: [
+					{name: 'Sample 2.1', url: 'sample-content-2.1'},
+					{name: 'Sample 2.2', url: 'sample-content-2.2'},
+				]},
 			]},
-		]},
-	]
+		],
+	}
 	```
-
-2. Host as a static website
-
-3. Optionally override CSS via `custom.css`
+* Host as a static website
