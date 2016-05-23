@@ -15,6 +15,7 @@ It is but to scratch an itch with a load of dangling intranet pages that needed 
 ## Usage
 
 * Configure via `config.js`:
+
 	```js
 	var config = {
 		title: 'Shepherd',
@@ -28,4 +29,5 @@ It is but to scratch an itch with a load of dangling intranet pages that needed 
 		],
 	}
 	```
+
 * Host as static website
