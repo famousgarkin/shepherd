@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+set -ex
+
+TARGET=$1
+
+docker tag famousgarkin/shepherd $TARGET
+docker push $TARGET

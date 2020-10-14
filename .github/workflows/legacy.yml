@@ -1,7 +1,7 @@
 on:
-  - push
+  push:
 jobs:
-  build:
+  legacy:
     runs-on: ubuntu-latest
     strategy:
       matrix:

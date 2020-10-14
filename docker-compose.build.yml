@@ -1,0 +1,7 @@
+version: '2'
+services:
+  shepherd:
+    image: famousgarkin/shepherd
+  curl:
+    image: curlimages/curl
+    command: 'true'
