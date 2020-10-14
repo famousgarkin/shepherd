@@ -12,20 +12,27 @@ It is but to scratch an itch with a load of dangling intranet pages that needed 
 
 ## Usage
 
-* Configure via `config.js`:
+- Clone
 
-	```js
-	var config = {
-		title: 'Shepherd',
-		items: [
-			{name: 'Shepherd', items: [
-				{name: 'Readme', url: './README.md'},
-				{name: 'Config', url: './config.js'},
-				{name: 'CSS', url: './shepherd.css'},
-			]},
-			{name: 'Example.com', url: 'https://example.com'},
-		],
-	}
-	```
+- Run `npm install`
 
-* Host as static website
+- Edit `config.js`:
+
+  ```js
+  var config = {
+    title: "Shepherd",
+    items: [
+      {
+        name: "Shepherd",
+        items: [
+          { name: "Readme", url: "./README.md" },
+          { name: "Config", url: "./config.js" },
+          { name: "CSS", url: "./shepherd.css" },
+        ],
+      },
+      { name: "Example.com", url: "https://example.com" },
+    ],
+  };
+  ```
+
+- Host as static website
