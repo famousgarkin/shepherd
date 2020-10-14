@@ -1,7 +1,5 @@
 # Shepherd
 
-[![build status](https://travis-ci.org/famousgarkin/shepherd.svg)](https://travis-ci.org/famousgarkin/shepherd)
-
 > Herd the scattered and disparate tools and pages under a common interface.
 
 Shepherd is a single-page application with a configurable hierarchical tabbed navigation that loads pages inside itself in an `iframe`.
