@@ -2,7 +2,7 @@
 
 set -ex
 
-docker build --tag famousgarkin/shepherd .
+docker build --no-cache --force-rm --tag famousgarkin/shepherd .
 
 export COMPOSE_FILE=./docker-compose.build.yml
 docker-compose up -d
