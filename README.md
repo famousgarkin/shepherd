@@ -10,29 +10,12 @@ It is but to scratch an itch with a load of dangling intranet pages that needed 
 
 ![](assets/example.png)
 
-## Usage
+Images:
 
-- Clone
+https://hub.docker.com/repository/docker/famousgarkin/shepherd
 
-- Run `npm install`
+Usage:
 
-- Edit `config.js`:
-
-  ```js
-  var config = {
-    title: "Shepherd",
-    items: [
-      {
-        name: "Shepherd",
-        items: [
-          { name: "Readme", url: "./README.md" },
-          { name: "Config", url: "./config.js" },
-          { name: "CSS", url: "./shepherd.css" },
-        ],
-      },
-      { name: "Example.com", url: "https://example.com" },
-    ],
-  };
-  ```
-
-- Host as static website
+```sh
+docker run --rm -v "$PWD/config.js:/app/config.js" -p 80:80 famousgarkin/shepherd
+```
