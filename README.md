@@ -1,7 +1,5 @@
 # Shepherd
 
-[![build status](https://travis-ci.org/famousgarkin/shepherd.svg)](https://travis-ci.org/famousgarkin/shepherd)
-
 > Herd the scattered and disparate tools and pages under a common interface.
 
 Shepherd is a single-page application with a configurable hierarchical tabbed navigation that loads pages inside itself in an `iframe`.
@@ -12,22 +10,12 @@ It is but to scratch an itch with a load of dangling intranet pages that needed 
 
 ![](assets/example.png)
 
-## Usage
+Images:
 
-* Configure via `config.js`:
+https://hub.docker.com/repository/docker/famousgarkin/shepherd
 
-	```js
-	var config = {
-		title: 'Shepherd',
-		items: [
-			{name: 'Shepherd', items: [
-				{name: 'Readme', url: './README.md'},
-				{name: 'Config', url: './config.js'},
-				{name: 'CSS', url: './shepherd.css'},
-			]},
-			{name: 'Example.com', url: 'https://example.com'},
-		],
-	}
-	```
+Usage:
 
-* Host as static website
+```sh
+docker run --rm -v "$PWD/config.js:/app/config.js" -p 80:80 famousgarkin/shepherd
+```
