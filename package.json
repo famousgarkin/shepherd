@@ -14,7 +14,6 @@
     "watchify": "^3.7.0"
   },
   "scripts": {
-    "postinstall": "bower install && npm run build",
     "lint": "eslint src tests .eslintrc.js",
     "test": "jasmine",
     "build": "browserify src/main.js -o build/bundle.js -t [babelify --presets react]",
