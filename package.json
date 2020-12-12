@@ -21,7 +21,7 @@
     "format": "prettier --write .",
     "test": "jasmine",
     "build": "browserify src/main.js -t babelify -o build/bundle.js",
-    "watch": "watchify src/main.js -t babelify -o build/bundle.js -d",
+    "watch": "watchify src/main.js -t babelify -o build/bundle.js -dv",
     "start": "http-server --port 80"
   }
 }
