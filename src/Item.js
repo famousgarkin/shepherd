@@ -6,7 +6,7 @@ var Item = function (data, parent) {
 	this.id = Item._getId(this.name)
 	this.idPath = Item._getIdPath(this.id, parent ? parent.idPath : null)
 }
-module.exports = Item
+export default Item
 
 Item._getId = function (name) {
 	return name

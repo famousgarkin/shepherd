@@ -1,6 +1,6 @@
-var React = require('react')
+import React from 'react'
 
-var ItemFactory = require('./ItemFactory')
+import ItemFactory from './ItemFactory'
 
 var Shepherd = React.createClass({
 	getInitialState: function () {
@@ -91,4 +91,4 @@ var Shepherd = React.createClass({
 		)
 	},
 })
-module.exports = Shepherd
+export default Shepherd

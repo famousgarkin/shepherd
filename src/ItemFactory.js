@@ -1,9 +1,8 @@
-var Item = require('./Item')
-
+import Item from './Item'
 var ItemFactory = function (configItems) {
 	this._configItems = configItems
 }
-module.exports = ItemFactory
+export default ItemFactory
 
 ItemFactory.prototype._getItems = function () {
 	return (function visit(configItems, parent) {

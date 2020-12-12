@@ -1,4 +1,4 @@
-var ItemFactory = require('../src/ItemFactory')
+import ItemFactory from '../src/ItemFactory'
 
 describe('ItemFactory', function () {
 	it('splits ID path to item IDs', function () {

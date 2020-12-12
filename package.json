@@ -9,6 +9,7 @@
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.10",
     "@babel/preset-react": "^7.12.10",
+    "@babel/register": "^7.12.10",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
     "jasmine": "^3.6.3",

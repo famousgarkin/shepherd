@@ -1,7 +1,7 @@
-var React = require('react')
-var ReactDOM = require('react-dom')
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-var Shepherd = require('./Shepherd')
+import Shepherd from './Shepherd'
 
 // prettier-ignore
 ReactDOM.render(

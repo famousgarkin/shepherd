@@ -1,4 +1,4 @@
-var Item = require('../src/Item')
+import Item from '../src/Item'
 
 describe('Item', function () {
 	describe('_getId', function () {
