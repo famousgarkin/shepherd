@@ -9,11 +9,11 @@ RUN npm run build
 
 FROM node:14-alpine as cleanup
 COPY --from=build /app /app
-RUN rm -rf /app/node_modules
+WORKDIR /app
+RUN npm prune --production
 
 FROM node:14-alpine
 COPY --from=cleanup /app /app
 WORKDIR /app
-RUN npm install http-server
-CMD ["./node_modules/.bin/http-server", "--port", "80"]
+CMD ["npm", "run", "start"]
 EXPOSE 80

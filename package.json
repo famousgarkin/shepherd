@@ -1,18 +1,18 @@
 {
   "private": true,
   "dependencies": {
-    "babel-preset-react": "^6.5.0",
-    "babelify": "^7.3.0",
     "bootstrap": "^3.3.2",
-    "browserify": "^13.0.1",
-    "jquery": "^1.11.3",
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "http-server": "^0.12.3",
+    "jquery": "^1.11.3"
   },
   "devDependencies": {
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
     "eslint": "^2.10.2",
-    "http-server": "^0.12.3",
     "jasmine": "^2.4.1",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
     "watchify": "^3.7.0"
   },
   "scripts": {
