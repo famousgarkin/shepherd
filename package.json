@@ -10,12 +10,12 @@
     "@babel/preset-env": "^7.12.10",
     "@babel/preset-react": "^7.12.10",
     "babelify": "^10.0.0",
-    "browserify": "^13.0.1",
+    "browserify": "^17.0.0",
     "jasmine": "^2.4.1",
     "prettier": "^2.2.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
-    "watchify": "^3.7.0"
+    "watchify": "^3.11.1"
   },
   "scripts": {
     "format": "prettier --write .",
