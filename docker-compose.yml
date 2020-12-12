@@ -1,0 +1,16 @@
+version: '2'
+services:
+  app:
+    image: node:14-alpine
+    volumes:
+      - .:/app:delegated
+    ports:
+      - 80:80
+    working_dir: /app
+    command: ["npm", "run", "start"]
+  watch:
+    image: node:14-alpine
+    volumes:
+      - .:/app:delegated
+    working_dir: /app
+    command: ["npm", "run", "watch"]
