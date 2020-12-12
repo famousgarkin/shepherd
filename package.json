@@ -6,8 +6,10 @@
     "jquery": "^1.11.3"
   },
   "devDependencies": {
-    "babel-preset-react": "^6.5.0",
-    "babelify": "^7.3.0",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "@babel/preset-react": "^7.12.10",
+    "babelify": "^10.0.0",
     "browserify": "^13.0.1",
     "jasmine": "^2.4.1",
     "prettier": "^2.2.1",
@@ -18,8 +20,8 @@
   "scripts": {
     "format": "prettier --write .",
     "test": "jasmine",
-    "build": "browserify src/main.js -o build/bundle.js -t [babelify --presets react]",
-    "watch": "watchify src/main.js -o build/bundle.js -t [babelify --presets react] -dv",
+    "build": "browserify src/main.js -t babelify -o build/bundle.js",
+    "watch": "watchify src/main.js -t babelify -o build/bundle.js -d",
     "start": "http-server --port 80"
   }
 }
