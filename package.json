@@ -6,8 +6,8 @@
     "bootstrap": "^3.3.2",
     "browserify": "^13.0.1",
     "jquery": "^1.11.3",
-    "react-dom": "^15.1.0",
-    "react": "^15.1.0"
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
   },
   "devDependencies": {
     "eslint": "^2.10.2",

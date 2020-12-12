@@ -1,4 +1,4 @@
-FROM node:4-alpine as build
+FROM node:14-alpine as build
 RUN apk update
 RUN apk add git
 COPY . /app
@@ -7,11 +7,11 @@ RUN npm install
 RUN npm run test
 RUN npm run build
 
-FROM node:4-alpine as cleanup
+FROM node:14-alpine as cleanup
 COPY --from=build /app /app
 RUN rm -rf /app/node_modules
 
-FROM node:4-alpine
+FROM node:14-alpine
 COPY --from=cleanup /app /app
 WORKDIR /app
 RUN npm install http-server
