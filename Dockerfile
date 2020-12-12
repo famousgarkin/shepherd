@@ -3,8 +3,7 @@ RUN apk update
 RUN apk add git
 COPY . /app
 WORKDIR /app
-RUN npm install --ignore-scripts
-RUN ./node_modules/.bin/bower install --allow-root
+RUN npm install
 RUN npm run test
 RUN npm run build
 
