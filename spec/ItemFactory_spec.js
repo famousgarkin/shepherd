@@ -9,6 +9,7 @@ describe('ItemFactory', function () {
 
 	describe('_getItems', function () {
 		it('creates a tree of items from configuration', function () {
+			// prettier-ignore
 			var configItems = [
 				{name: 'page 1', url: 'url-1', items: [
 					{name: 'page 11', url: 'url-11'},
@@ -40,6 +41,7 @@ describe('ItemFactory', function () {
 
 	describe('getItem', function () {
 		it('gets item by ID path', function () {
+			// prettier-ignore
 			var configItems = [
 				{name: 'Page 1', url: 'url-1', items: [
 					{name: 'Page 11', url: 'url-11'},

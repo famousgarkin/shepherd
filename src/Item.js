@@ -10,9 +10,9 @@ module.exports = Item
 
 Item._getId = function (name) {
 	return name
-	.replace(/([^a-z0-9])+/ig, '-')
-	.replace(/^-|-$/g, '')
-	.toLowerCase()
+		.replace(/([^a-z0-9])+/gi, '-')
+		.replace(/^-|-$/g, '')
+		.toLowerCase()
 }
 
 Item._getIdPath = function (id, parentIdPath) {

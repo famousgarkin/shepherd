@@ -11,8 +11,8 @@ describe('Item', function () {
 			expect(Item._getId('some\\\\page\\\\')).toBe('some-page')
 		})
 	})
-	
-	describe('_getItemIdPath', function() {
+
+	describe('_getItemIdPath', function () {
 		it('gets ID path from ID and parent ID path', function () {
 			expect(Item._getIdPath('some', 'page')).toBe('page/some')
 			expect(Item._getIdPath('some', 'page/1/2')).toBe('page/1/2/some')

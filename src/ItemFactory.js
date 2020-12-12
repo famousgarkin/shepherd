@@ -5,9 +5,9 @@ var ItemFactory = function (configItems) {
 }
 module.exports = ItemFactory
 
-ItemFactory.prototype._getItems = function() {
+ItemFactory.prototype._getItems = function () {
 	return (function visit(configItems, parent) {
-		return configItems.map(function(configItem) {
+		return configItems.map(function (configItem) {
 			var item = new Item(configItem, parent)
 			if (item.items) {
 				item.items = visit(item.items, item)
@@ -17,7 +17,7 @@ ItemFactory.prototype._getItems = function() {
 	})(this._configItems)
 }
 
-ItemFactory.prototype.getItem = function(idPath) {
+ItemFactory.prototype.getItem = function (idPath) {
 	var items = this._getItems()
 	idPath = idPath.toLowerCase() || items[0].idPath
 	var ids = idPath.split('/')

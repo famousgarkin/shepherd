@@ -33,7 +33,7 @@ var Shepherd = React.createClass({
 		})
 	},
 
-	spanFrame: function() {
+	spanFrame: function () {
 		// TODO: handle frame spanning without jQuery?
 		var $window = $(window)
 		var $frame = $(this.refs.frame)
@@ -49,13 +49,16 @@ var Shepherd = React.createClass({
 		window.addEventListener('hashchange', this.navigate)
 
 		// delay initial frame resize until rendered properly
-		setTimeout(function () {
-			if (window.requestAnimationFrame) {
-				window.requestAnimationFrame(this.spanFrame)
-			} else {
-				this.spanFrame()
-			}
-		}.bind(this), 0)
+		setTimeout(
+			function () {
+				if (window.requestAnimationFrame) {
+					window.requestAnimationFrame(this.spanFrame)
+				} else {
+					this.spanFrame()
+				}
+			}.bind(this),
+			0,
+		)
 		window.addEventListener('resize', this.spanFrame)
 	},
 
@@ -77,8 +80,13 @@ var Shepherd = React.createClass({
 					)
 				})}
 
-				<iframe ref="frame" src={this.state.url} frameborder="0" width={this.state.frameWidth} height={this.state.frameHeight}>
-				</iframe>
+				<iframe
+					ref="frame"
+					src={this.state.url}
+					frameborder="0"
+					width={this.state.frameWidth}
+					height={this.state.frameHeight}
+				></iframe>
 			</div>
 		)
 	},

@@ -7,10 +7,12 @@ services:
     ports:
       - 80:80
     working_dir: /app
+    # prettier-ignore
     command: ["npm", "run", "start"]
   watch:
     image: node:14-alpine
     volumes:
       - .:/app:delegated
     working_dir: /app
+    # prettier-ignore
     command: ["npm", "run", "watch"]

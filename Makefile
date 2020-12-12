@@ -3,8 +3,8 @@ default:
 install:
 	docker-compose run --rm app npm install
 
-lint:
-	docker-compose run --rm app npm run lint
+format:
+	docker-compose run --rm app npm run format
 
 test:
 	docker-compose run --rm app npm run test
