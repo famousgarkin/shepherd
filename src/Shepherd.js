@@ -71,8 +71,13 @@ var Shepherd = React.createClass({
 						<ul key={i} className="nav nav-tabs">
 							{item.map(function (item, i) {
 								return (
-									<li key={i} className={item.active ? 'active' : ''}>
-										<a href={'#/' + item.idPath}>{item.name}</a>
+									<li key={i} className="nav-item">
+										<a
+											className={item.active ? 'nav-link active' : 'nav-link'}
+											href={'#/' + item.idPath}
+										>
+											{item.name}
+										</a>
 									</li>
 								)
 							})}
