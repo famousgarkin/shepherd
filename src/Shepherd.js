@@ -88,7 +88,7 @@ var Shepherd = React.createClass({
 				<iframe
 					ref="frame"
 					src={this.state.url}
-					frameborder="0"
+					frameBorder="0"
 					width={this.state.frameWidth}
 					height={this.state.frameHeight}
 				></iframe>
