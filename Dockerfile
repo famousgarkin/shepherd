@@ -1,6 +1,4 @@
 FROM node:14-alpine as build
-RUN apk update
-RUN apk add git
 COPY . /app
 WORKDIR /app
 RUN npm install

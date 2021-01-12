@@ -17,5 +17,5 @@ https://hub.docker.com/repository/docker/famousgarkin/shepherd
 Usage:
 
 ```sh
-docker run --rm -v "$PWD/config.js:/app/config.js" -p 80:80 famousgarkin/shepherd
+docker run --rm -v "$PWD/config.js:/app/dist/config.js" -p 80:80 famousgarkin/shepherd
 ```

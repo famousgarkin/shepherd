@@ -5,6 +5,6 @@ set -ex
 docker build --no-cache --force-rm --tag famousgarkin/shepherd .
 
 export COMPOSE_FILE=./docker-compose.build.yml
-docker-compose up -d
+docker-compose up -d --force-recreate
 docker-compose run --rm curl --silent -D - --output /dev/null --fail --show-error http://shepherd
 docker-compose down

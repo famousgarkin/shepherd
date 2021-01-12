@@ -5,14 +5,7 @@ services:
     volumes:
       - .:/app:delegated
     ports:
-      - 80:80
-    working_dir: /app
-    # prettier-ignore
-    command: ["npm", "run", "start"]
-  watch:
-    image: node:14-alpine
-    volumes:
-      - .:/app:delegated
+      - 8080:8080
     working_dir: /app
     # prettier-ignore
     command: ["npm", "run", "watch"]
