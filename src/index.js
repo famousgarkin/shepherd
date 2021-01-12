@@ -5,6 +5,6 @@ import Shepherd from './Shepherd'
 
 // prettier-ignore
 ReactDOM.render(
-	<Shepherd config={global.config} />,
-	document.getElementById('shepherd')
+	<Shepherd config={global.shepherdConfig} />,
+	document.getElementById('shepherdRoot')
 )

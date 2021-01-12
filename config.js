@@ -1,4 +1,4 @@
-var config = {
+var shepherdConfig = {
 	title: 'Shepherd',
 	items: [
 		{
