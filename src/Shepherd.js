@@ -2,7 +2,7 @@ import React from 'react'
 
 import ItemFactory from './ItemFactory'
 
-class Shepherd extends React.Component {
+export default class Shepherd extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -100,4 +100,3 @@ class Shepherd extends React.Component {
 		)
 	}
 }
-export default Shepherd
