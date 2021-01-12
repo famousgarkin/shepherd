@@ -2,21 +2,25 @@ import React from 'react'
 
 import ItemFactory from './ItemFactory'
 
-var Shepherd = React.createClass({
-	getInitialState: function () {
-		return {
-			itemFactory: new ItemFactory(this.props.config.items),
+class Shepherd extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			itemFactory: new ItemFactory(props.config.items),
 
-			title: this.props.config.title,
+			title: props.config.title,
 			navigation: [],
 			url: null,
 
 			frameWidth: null,
 			frameHeight: null,
 		}
-	},
+		this.navigate = this.navigate.bind(this)
+		this.spanFrame = this.spanFrame.bind(this)
+		this.frame = React.createRef()
+	}
 
-	navigate: function () {
+	navigate() {
 		var location = window.location.hash.substr(2)
 		var item = this.state.itemFactory.getItem(location)
 
@@ -31,20 +35,20 @@ var Shepherd = React.createClass({
 			navigation: item.navigation,
 			url: item.url,
 		})
-	},
+	}
 
-	spanFrame: function () {
+	spanFrame() {
 		// TODO: handle frame spanning without jQuery?
 		var $window = $(window)
-		var $frame = $(this.refs.frame)
+		var $frame = $(this.frame.current)
 
 		this.setState({
 			frameWidth: $window.width() - $frame.offset().left,
 			frameHeight: $window.height() - $frame.offset().top,
 		})
-	},
+	}
 
-	componentDidMount: function () {
+	componentDidMount() {
 		this.navigate()
 		window.addEventListener('hashchange', this.navigate)
 
@@ -60,9 +64,9 @@ var Shepherd = React.createClass({
 			0,
 		)
 		window.addEventListener('resize', this.spanFrame)
-	},
+	}
 
-	render: function () {
+	render() {
 		document.title = this.state.title
 		return (
 			<div>
@@ -86,7 +90,7 @@ var Shepherd = React.createClass({
 				})}
 
 				<iframe
-					ref="frame"
+					ref={this.frame}
 					src={this.state.url}
 					frameBorder="0"
 					width={this.state.frameWidth}
@@ -94,6 +98,6 @@ var Shepherd = React.createClass({
 				></iframe>
 			</div>
 		)
-	},
-})
+	}
+}
 export default Shepherd
