@@ -44,24 +44,28 @@ export default class Shepherd extends React.Component {
 				<div className="shepherd-tabs">
 					{this.state.navigation.map(function (item, i) {
 						return (
-							<ul key={i} className="nav nav-tabs">
-								{item.map(function (item, i) {
-									return (
-										<li key={i} className="nav-item">
-											<a
-												className={item.active ? 'nav-link active' : 'nav-link'}
-												href={'#/' + item.idPath}
+							<div key={i} className="pf-c-tabs">
+								<ul className="pf-c-tabs__list">
+									{item.map(function (item, i) {
+										return (
+											<li
+												key={i}
+												className={
+													item.active ? 'pf-c-tabs__item pf-m-current' : 'pf-c-tabs__item'
+												}
 											>
-												{item.name}
-											</a>
-										</li>
-									)
-								})}
-							</ul>
+												<a className="pf-c-tabs__link" href={'#/' + item.idPath}>
+													{item.name}
+												</a>
+											</li>
+										)
+									})}
+								</ul>
+							</div>
 						)
 					})}
 				</div>
-				<iframe className="shepherd-frame" src={this.state.url} frameBorder="0"></iframe>
+				<iframe className="shepherd-frame pf-c-tab-content" src={this.state.url} frameBorder="0"></iframe>
 			</div>
 		)
 	}

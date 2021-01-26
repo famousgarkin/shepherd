@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
+import '@patternfly/patternfly/patternfly.css'
 import './index.css'
 
 import React from 'react'
