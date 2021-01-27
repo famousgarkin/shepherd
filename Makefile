@@ -9,5 +9,5 @@ format:
 test:
 	docker-compose run --rm app npm run test
 
-watch:
+start:
 	docker-compose up --force-recreate
