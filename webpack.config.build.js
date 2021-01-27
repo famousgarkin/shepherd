@@ -15,7 +15,7 @@ module.exports = {
 			patterns: [
 				{from: './assets/config.js'},
 				{from: './assets/favicon.ico'},
-				{from: './assets/shepherd.png'},
+				{from: './assets/artwork.png'},
 				{from: './README.md'},
 			],
 		}),
