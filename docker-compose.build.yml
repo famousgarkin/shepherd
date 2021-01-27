@@ -2,6 +2,7 @@ version: '3'
 services:
   shepherd:
     image: famousgarkin/shepherd
+    build: .
   curl:
     image: curlimages/curl
     command: 'true'
