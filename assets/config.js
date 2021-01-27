@@ -1,11 +1,11 @@
 var shepherdConfig = {
-	title: 'Shepherd Demo',
+	title: 'Shepherd Example',
 	items: [
 		{
 			name: 'Shepherd',
 			items: [
-				{name: 'Readme', url: './README.md'},
 				{name: 'Config', url: './config.js'},
+				{name: 'Readme', url: './README.md'},
 				{name: 'Artwork', url: './shepherd.png'},
 			],
 		},

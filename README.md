@@ -6,7 +6,7 @@ Shepherd is a single-page application with a configurable hierarchical tabbed na
 
 It is but to scratch an itch with a load of dangling intranet pages that needed consolidation.
 
-![](assets/shepherd.png)
+![](assets/artwork.png)
 
 ![](assets/example.png)
 
