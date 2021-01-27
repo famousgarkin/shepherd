@@ -6,7 +6,7 @@ var shepherdConfig = {
 			items: [
 				{name: 'Config', url: './config.js'},
 				{name: 'Readme', url: './README.md'},
-				{name: 'Artwork', url: './shepherd.png'},
+				{name: 'Artwork', url: './artwork.png'},
 			],
 		},
 		{name: 'Example.com', url: 'https://example.com'},
